@@ -1,0 +1,48 @@
+{{ define "content" }}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <img src="/images/logo.png" width="25%" height="25%" alt="">
+                </div>
+            </div>
+        </div>
+        {{ if not .Tickets }}
+        <div class="h3">There are no tickets on the database</div>
+        {{ else }}
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Current Tickets</h1>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range .Tickets }}
+                    <tr>
+                        <td><a href="/tickets/{{.ID}}">{{.ID}}</a></td>
+                        <td> {{.Title}} </td>
+                        <td> {{.Time}} </td>
+                        <td>
+                            {{ if eq .Status "open" }}
+                            <span class="badge badge-warning">open</span>
+                            {{ else }}
+                            <span class="badge badge-success">closed</span>
+                            {{ end }}
+                        </td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+        {{ end }}
+    </div>
+{{end}}
